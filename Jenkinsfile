@@ -88,10 +88,6 @@ pipeline {
         maven 'Maven3'
     }
 
-    options {
-        timestamps()
-    }
-
     stages {
 
         stage('Checkout Source Code') {
@@ -104,7 +100,7 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                echo 'Running Maven clean and tests...'
+                echo 'Running Maven tests...'
                 bat 'mvn clean test'
             }
         }
@@ -129,11 +125,9 @@ pipeline {
             echo 'Library JAR packaged and installed successfully'
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
-
         failure {
             echo 'Build failed'
         }
-
         always {
             echo 'Pipeline execution finished'
         }
