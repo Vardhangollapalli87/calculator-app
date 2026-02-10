@@ -1,40 +1,38 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven3'
+    }
+
     stages {
 
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/laxmi916/calculator-app.git'
+                git 'https://github.com/Vardhangollapalli87/calculator-app.git'
             }
         }
 
         stage('Build & Test') {
             steps {
-                sh 'mvn clean test'
+                bat 'mvn clean test'
             }
         }
 
-        stage('Package JAR') {
+        stage('Package') {
             steps {
-                sh 'mvn package'
-            }
-        }
-
-        stage('Install to Local Repo') {
-            steps {
-                sh 'mvn install'
+                bat 'mvn package'
             }
         }
     }
 
     post {
         success {
-            echo 'Library JAR packaged and installed successfully'
+            echo 'Build succeeded!'
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
         failure {
-            echo 'Build failed'
+            echo 'Build failed!'
         }
     }
 }
