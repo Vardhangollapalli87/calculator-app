@@ -45,9 +45,11 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/Vardhangollapalli87/calculator-app.git'
+                git branch: 'main',
+                    url: 'https://github.com/Vardhangollapalli87/calculator-app.git'
             }
         }
+
 
         stage('Build & Test') {
             steps {
