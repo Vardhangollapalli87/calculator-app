@@ -101,21 +101,21 @@ pipeline {
         stage('Build & Test') {
             steps {
                 echo 'Running Maven tests...'
-                bat 'mvn clean test'
+                sh 'mvn clean test'
             }
         }
 
         stage('Package JAR') {
             steps {
                 echo 'Packaging application into JAR...'
-                bat 'mvn package'
+                sh 'mvn package'
             }
         }
 
         stage('Install to Local Maven Repository') {
             steps {
                 echo 'Installing JAR into local Maven repository...'
-                bat 'mvn install'
+                sh 'mvn install'
             }
         }
     }
